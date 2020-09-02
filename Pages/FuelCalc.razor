@@ -1,6 +1,8 @@
+@page "/"
+@page "/index"
 @page "/fuelcalc"
 
-<h3>Fuel calculator</h3>
+<h2>Fuel calculator</h2>
 
 <EditForm Model="fuelCalc" OnValidSubmit="Calculate">
     <DataAnnotationsValidator />
@@ -16,7 +18,7 @@
         <label>Lap time:</label>
         <div style="display: flex; align-content: space-between; flex-direction: row;">
             <div class="col">
-                <label class="text-secondary">Munites</label>
+                <label class="text-secondary">Minutes</label>
                 <InputNumber class="form-control" @bind-Value="@fuelCalc.LapTimeMin" />
                 <ValidationMessage For="@(()=>fuelCalc.LapTimeMin)" />
             </div>
