@@ -1,0 +1,64 @@
+@page "/tirecalc"
+
+<h2>Tire pressure calculator</h2>
+
+<EditForm Model="tireCalculator" OnValidSubmit="Calculate">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-3">
+                <label class="text-secondary">kPA:</label>
+                <InputNumber class="form-control" @bind-Value="tireCalculator.KPA" />
+                <ValidationMessage For="@(()=>tireCalculator.KPA)" />
+            </div>
+            <div class="col-3">
+                <label class="text-secondary">PSI:</label>
+                <div>
+                    <input type="text" class="@PSIStyle" disabled value="@PSI" />
+                </div>
+            </div>
+            <div class="col-6">
+                <label class="text-secondary">Recommendations:</label>
+                <div>
+                    <input type="text" class="@PSIStyle" disabled value="@recommendations" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-success" type="submit">Calculate</button>
+</EditForm>
+
+@code
+{
+    private TireCalculator tireCalculator = new TireCalculator();
+    private double PSI = 0.0;
+    private string PSIStyle = "form-control";
+    private string recommendations = String.Empty;
+
+    private void Calculate(){
+        if (tireCalculator.KPA == 0)
+            return;
+
+        const double multiplicator = 6.895;
+        double result = Math.Round(tireCalculator.KPA / multiplicator, 2);
+        
+        if (result > 0 && result < 25.0)
+        {
+            PSIStyle = "form-control text-info";
+            recommendations = $"increase tire pressure by {Math.Round((28 - result) * multiplicator, 0)} kPA";
+        }
+        else if (result >= 25.0 && result < 30.0)
+        {
+            PSIStyle = "form-control text-success";
+            recommendations = "normal tire pressure";
+        }else
+        {
+            PSIStyle = "form-control text-danger";
+            recommendations = $"decrease tire pressure by {Math.Round((result - 28) * multiplicator, 0)} kPA";
+        }
+
+        PSI = result;
+    }
+}
