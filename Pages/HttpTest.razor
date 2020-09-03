@@ -1,0 +1,18 @@
+@page "/http"
+
+@using System.Net.Http
+@inject HttpClient Http
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">@testClass.Name</h5>
+    <p class="card-text">@testClass.Desc</p>
+  </div>
+</div>
+
+@code {
+    private HttpTestClass testClass = new HttpTestClass();
+
+    protected override async Task OnInitializedAsync() => 
+        testClass = await Http.GetFromJsonAsync<HttpTestClass>("https://blazor-backend-test.herokuapp.com/");
+}
