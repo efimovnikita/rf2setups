@@ -3,12 +3,21 @@
 @using System.Net.Http
 @inject HttpClient Http
 
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">@testClass.Name</h5>
-    <p class="card-text">@testClass.Desc</p>
+@if (testClass.Name != null)
+{
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">@testClass.Name</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Get json-data from: https://blazor-backend-test.herokuapp.com/</h6>
+      <p class="card-text">@testClass.Desc</p>
+    </div>
   </div>
-</div>
+}else {
+  <button class="btn btn-primary" type="button" disabled>
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    Loading...
+  </button>
+}
 
 @code {
     private HttpTestClass testClass = new HttpTestClass();
