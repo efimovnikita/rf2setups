@@ -1,0 +1,40 @@
+{
+    "Cars":[
+        {
+            "Id":"6f0cb39c-c27a-4ecd-ad9e-ba67240bc3f5",
+            "Name":"Ferrari 488 GTE",
+            "Date":"2017-09-08T19:01:55.714942+03:00",
+            "CarBrandImageURL":"https://cdn.iconscout.com/icon/free/png-256/ferrari-4-202771.png"
+        }
+    ],
+    "Tracks":[
+        {
+            "Id":"3ff9f001-c054-4158-ac2e-c95ffe7c65cd",
+            "Name":"Nurburgring",
+            "Date":"2017-09-08T19:01:55.714942+03:00",
+            "TrackMapImageURL":"https://www.gtplanet.net/forum/media/nordschleife-24h-sector-map-v0-2.39775/full"
+        },
+        {
+            "Id":"3eadd9b1-e26f-4c72-beb3-4e6ee69fd27b",
+            "Name":"Monza",
+            "Date":"2017-09-08T19:01:55.714942+03:00",
+            "TrackMapImageURL":"https://www.researchgate.net/profile/Marco_Biancolini/publication/280099703/figure/fig6/AS:391417395466246@1470332587649/Autodromo-Nazionale-Monza.png"
+        }
+    ],
+    "Setups":[
+        {
+            "Id":"d2b242e6-62a3-4c1d-9cac-f36217b6e480",
+            "Name":"Monza - race",
+            "Date":"2017-09-08T19:01:55.714942+03:00",
+            "Car":"6f0cb39c-c27a-4ecd-ad9e-ba67240bc3f5",
+            "Track":"3eadd9b1-e26f-4c72-beb3-4e6ee69fd27b"
+        },
+        {
+            "Id":"abbf3e2d-4389-400d-82ce-e7027c60185a",
+            "Name":"Nurburgring - qualification",
+            "Date":"2017-09-08T19:01:55.714942+03:00",
+            "Car":"6f0cb39c-c27a-4ecd-ad9e-ba67240bc3f5",
+            "Track":"3ff9f001-c054-4158-ac2e-c95ffe7c65cd"
+        }
+    ]    
+}

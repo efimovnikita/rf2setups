@@ -14,12 +14,5 @@ namespace rf2setups.Shared.Entities
         public DateTime Date { get; set; }
         [Required]
         public string CarBrandImageURL { get; set; }
-        public Car(string name, string imgURL)
-        {
-            Id = Guid.NewGuid();
-            Name = name;
-            Date = DateTime.Now;
-            CarBrandImageURL = imgURL;
-        }
     }
 }

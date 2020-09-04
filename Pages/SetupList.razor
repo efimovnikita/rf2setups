@@ -2,32 +2,36 @@
 
 <div class="container">
     <h2>Cars setups</h2>
-
-    @if (Data.Setups.Count != 0)
+    
+    @if (Data.Setups != null)
     {
-        
-        <div class="card-deck">
+        @if (Data.Setups.Count != 0)
+        {
+            
+            <div class="card-deck">
 
-            @foreach (var setup in Data.Setups)
-            {
-                var car = Data.Cars.Where(c => c.Id == setup.Car).FirstOrDefault();
-                var track = Data.Tracks.Where(t => t.Id == setup.Track).FirstOrDefault();
-                
-                <SetupComponent 
-                    Id="@setup.Id"
-                    Name="@setup.Name" 
-                    CarName="@(car.Name)" 
-                    TrackName="@(track.Name)"
-                    LapTime="@setup.LapTime"
-                    ImgURL="@car.CarBrandImageURL"
-                    OnClickDeleteButton="@(() => DeleteSetupById(setup.Id))"
-                />
-            }  
+                @foreach (var setup in Data.Setups)
+                {
+                    var car = Data.Cars.Where(c => c.Id == setup.Car).FirstOrDefault();
+                    var track = Data.Tracks.Where(t => t.Id == setup.Track).FirstOrDefault();
+                    
+                    <SetupComponent 
+                        Id="@setup.Id"
+                        Name="@setup.Name" 
+                        CarName="@(car.Name)" 
+                        TrackName="@(track.Name)"
+                        ImgURL="@car.CarBrandImageURL"
+                        OnClickDeleteButton="@(() => DeleteSetupById(setup.Id))"
+                    />
+                }  
 
-        </div>
-    }else
-    {
-        <p>Setup list is empty.</p>
+            </div>
+        }else
+        {
+            <p>Setup list is empty.</p>
+        }
+    }else{
+        <Spinner />
     }
 </div>
 

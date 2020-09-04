@@ -14,13 +14,5 @@ namespace rf2setups.Shared.Entities
         public DateTime Date { get; set; }
         [Required]
         public string TrackMapImageURL { get; set; }
-
-        public Track(string name, string imgURL)
-        {
-            Id = Guid.NewGuid();
-            Name = name;
-            Date = DateTime.Now;
-            TrackMapImageURL = imgURL;
-        }
     }
 }
