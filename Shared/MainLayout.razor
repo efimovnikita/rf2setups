@@ -10,6 +10,36 @@
     </div>
 
     <div class="content px-4">
-        @Body
+        <CascadingValue Value="@appData">
+            @Body
+        </CascadingValue>
     </div>
 </div>
+
+@code
+{
+    public AppData appData { get; set; } = new AppData(); 
+
+    protected override void OnInitialized()
+    {
+        var (cars, tracks, setups) = CreateDemoData();
+        appData.Cars = cars;
+        appData.Tracks = tracks;
+        appData.Setups = setups;
+    }
+
+    private (List<Car>, List<Track>, List<Setup>) CreateDemoData(){
+        var car = new Car("Ferrari 488 GT3", "https://cdn.iconscout.com/icon/free/png-256/ferrari-4-202771.png");
+        var trackNur = new Track("Nurburgring", "https://www.gtplanet.net/forum/media/nordschleife-24h-sector-map-v0-2.39775/full");
+        var trackMonza = new Track("Monza", "https://www.researchgate.net/profile/Marco_Biancolini/publication/280099703/figure/fig6/AS:391417395466246@1470332587649/Autodromo-Nazionale-Monza.png");
+
+        var setupForNur = new Setup(car.Id, trackNur.Id, "Nurburgring - qualification", new TimeSpan(0, 1, 23));
+        var setupForMon = new Setup(car.Id, trackMonza.Id, "Monza - race", new TimeSpan(0, 2, 25));
+
+        var cars = new List<Car>{car};
+        var tracks = new List<Track>{ trackMonza, trackNur };
+        var setups = new List<Setup>{ setupForMon, setupForNur };
+        
+        return (cars, tracks, setups);
+    }
+}

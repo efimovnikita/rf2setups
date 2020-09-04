@@ -1,4 +1,4 @@
-<div class="card mb-3" style="max-width: 540px;">
+@* <div class="card mb-3" style="max-width: 540px;">
   <div class="row no-gutters">
     <div class="col-md-4">
       <img src="@ImgURL" class="card-img" alt="brand logo">
@@ -9,15 +9,32 @@
         <h6 class="card-subtitle mb-2 text-muted"><b>Car:</b> @CarName</h6>
         <h6 class="card-subtitle mb-2 text-muted"><b>Track:</b> @TrackName</h6>
         <h6 class="card-subtitle mb-2 text-muted"><b>Lap time:</b> @LapTime.ToString()</h6>
-        <a href="#" class="card-link">Details</a>
-        <a href="#" class="card-link">Compile & download</a>
+        <button type="button" class="btn btn-link text-info">Details</button>
+        <button type="button" class="btn btn-link text-danger" @onclick="@OnClickDeleteButton">Delete</button>
       </div>
     </div>
+  </div>
+</div> *@
+
+<div class="card">
+  <div class="card-header text-center">
+    @TrackName
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">@Name</h5>
+    <h6 class="card-subtitle mb-2 text-muted"><b>Lap time:</b> @LapTime.ToString()</h6>
+    <button type="button" class="btn btn-info">Details</button>
+    <button type="button" class="btn btn-danger" @onclick="@OnClickDeleteButton">Delete</button>
+  </div>
+  <div class="card-footer text-center">
+    @CarName
   </div>
 </div>
 
 @code
 {
+    [Parameter]
+    public Guid Id { get; set; }
     [Parameter]
     public string Name { get; set; }
     [Parameter]
@@ -28,4 +45,6 @@
     public string ImgURL { get; set; }
     [Parameter]
     public TimeSpan LapTime { get; set; }
+    [Parameter]
+    public EventCallback OnClickDeleteButton { get; set; }
 }
