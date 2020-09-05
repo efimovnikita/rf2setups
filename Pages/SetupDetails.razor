@@ -1,0 +1,34 @@
+@page "/setup/{Id}"
+@inject NavigationManager NavigationManager
+
+@if (setup != null)
+{
+    <h2>@car.Name - @track.Name</h2>
+    <h3 class="text-muted">@setup.Name</h3>
+
+    <button type="button" class="btn btn-dark" @onclick="@(()=>{NavigationManager.NavigateTo($"setups");})">Back</button>
+
+}else
+{
+    <Spinner />
+}
+
+@code 
+{
+    [Parameter]
+    public string Id { get; set; }
+    [CascadingParameter]
+    private AppData Data { get; set; }
+
+    private Setup setup;
+    private Car car;
+    private Track track;
+
+
+    protected override void OnInitialized()
+    {
+        setup = Data.Setups.Where(s => s.Id == Guid.Parse(Id)).FirstOrDefault();
+        car = Data.Cars.Where(c => c.Id == setup.Car).FirstOrDefault();
+        track = Data.Tracks.Where(t => t.Id == setup.Track).FirstOrDefault();
+    }
+}
