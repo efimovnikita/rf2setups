@@ -1,7 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-@using System.Net.Http
-@inject HttpClient Http
+
 
 <div class="sidebar">
     <NavMenu />
@@ -13,18 +12,7 @@
     </div>
 
     <div class="content px-4">
-        <CascadingValue Value="@appData">
             @Body
-        </CascadingValue>
     </div>
 </div>
 
-@code
-{
-    public AppData appData { get; set; } = new AppData(); 
-
-    protected override async Task OnInitializedAsync()
-    {
-        appData = await Http.GetFromJsonAsync<AppData>("sample-data/data.json");
-    }
-}
