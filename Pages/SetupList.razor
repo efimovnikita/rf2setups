@@ -7,42 +7,42 @@
     
     @if (Setups != null)
     {
-        <div class="row">
-            <div class="col-md mb-2">
-                <label>Filter by track:</label>
-                <select class="custom-select" name="tracks" @bind="SelectedTrack">
-                    <option value="Select track..." selected>Select track...</option>
-                    @foreach (var name in Tracks)
-                    {
-                        <option value="@name">@name</option>
-                    }
-                </select>   
+        <div class="filter-container">
+            <div class="filter-selects">
+                <div class="filter-select">
+                    <label>Filter by track:</label>
+                    <select class="custom-select" name="tracks" @bind="SelectedTrack">
+                        <option value="Select track..." selected>Select track...</option>
+                        @foreach (var name in Tracks)
+                        {
+                            <option value="@name">@name</option>
+                        }
+                    </select>   
+                </div>
+                <div class="filter-select">
+                    <label>Filter by car:</label>
+                    <select class="custom-select" name="cars" @bind="SelectedCar">
+                        <option value="Select car..." selected>Select car...</option>
+                        @foreach (var name in Cars)
+                        {
+                            <option value="@name">@name</option>
+                        }
+                    </select>
+                </div>
             </div>
-            <div class="col-md">
-                <label>Filter by car:</label>
-                <select class="custom-select" name="cars" @bind="SelectedCar">
-                    <option value="Select car..." selected>Select car...</option>
-                    @foreach (var name in Cars)
-                    {
-                        <option value="@name">@name</option>
-                    }
-                </select>
-            </div>
-        </div>
-        <div class="row mt-2 mb-2">
-            <div class="col-md mb-2">
-                <button type="button" class="btn btn-dark mr-2" @onclick="OnClickFilter">Filter</button>
-            </div>
-            <div class="col-md mb-2">
-                <button type="button" class="btn btn-secondary mr-2" @onclick="OnClickClearFilter">Clear</button>
-            </div>
-            <div class="col-md mb-2">
-                <button type="button" class="btn btn-success mr-2" @onclick="OnClickOrderByTrack"><span class="oi oi-sort-ascending"></span> by track</button>
-            </div>
-            <div class="col-md mb-2">
-                <button type="button" class="btn btn-success mr-2" @onclick="OnClickOrderByCar"><span class="oi oi-sort-ascending"></span> by car</button>
+            <div class="filter-buttons">
+                <button type="button" class="btn btn-dark" @onclick="OnClickFilter">Filter</button>
+                <button type="button" class="btn btn-secondary" @onclick="OnClickClearFilter">Clear</button>
+                <button type="button" class="btn btn-success" @onclick="OnClickOrderByTrack"><span class="oi oi-sort-ascending"></span> by track</button>
+                <button type="button" class="btn btn-success" @onclick="OnClickOrderByCar"><span class="oi oi-sort-ascending"></span> by car</button>
             </div>
         </div>
+
+
+
+
+
+
         <hr />
 
         @if (Setups.Count != 0)

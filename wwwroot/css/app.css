@@ -136,6 +136,69 @@ app {
     top: 0.5rem;
 }
 
+
+
+
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.filter-selects {
+    display: flex;
+    flex-direction: row;
+}
+
+.filter-select {
+    margin-right: 1em;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+    .filter-buttons button {
+        margin-right: 0.5em;
+    }
+
+@media (max-width: 1220px) {
+    .filter-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filter-buttons {
+        margin-top: 1em;
+    }
+
+}
+
+@media (max-width: 800px) {
+    .filter-selects {
+        flex-direction: column;
+    }
+
+    .filter-select {
+        margin-bottom: 0.5em;
+    }
+}
+
+@media (max-width: 440px) {
+    .filter-buttons {
+        width: 100%;
+        flex-direction: column;
+    }
+
+        .filter-buttons button {
+            width: 100%;
+            margin-bottom: 0.5em;
+        }
+}
+
+
 @media (max-width: 767.98px) {
     .main .top-row:not(.auth) {
         display: none;
