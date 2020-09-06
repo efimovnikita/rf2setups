@@ -1,16 +1,56 @@
+@page "/"
+@page "/index"
 @page "/setups"
 
 <div class="container">
     <h2>Cars setups</h2>
     
-    @if (Data.Setups != null)
+    @if (Setups != null)
     {
-        @if (Data.Setups.Count != 0)
+        <div class="row">
+            <div class="col-md mb-2">
+                <label>Filter by track:</label>
+                <select class="custom-select" name="tracks" @bind="SelectedTrack">
+                    <option value="Select track..." selected>Select track...</option>
+                    @foreach (var name in Tracks)
+                    {
+                        <option value="@name">@name</option>
+                    }
+                </select>   
+            </div>
+            <div class="col-md">
+                <label>Filter by car:</label>
+                <select class="custom-select" name="cars" @bind="SelectedCar">
+                    <option value="Select car..." selected>Select car...</option>
+                    @foreach (var name in Cars)
+                    {
+                        <option value="@name">@name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="row mt-2 mb-2">
+            <div class="col-md mb-2">
+                <button type="button" class="btn btn-dark mr-2" @onclick="OnClickFilter">Filter</button>
+            </div>
+            <div class="col-md mb-2">
+                <button type="button" class="btn btn-secondary mr-2" @onclick="OnClickClearFilter">Clear</button>
+            </div>
+            <div class="col-md mb-2">
+                <button type="button" class="btn btn-success mr-2" @onclick="OnClickOrderByTrack"><span class="oi oi-sort-ascending"></span> by track</button>
+            </div>
+            <div class="col-md mb-2">
+                <button type="button" class="btn btn-success mr-2" @onclick="OnClickOrderByCar"><span class="oi oi-sort-ascending"></span> by car</button>
+            </div>
+        </div>
+        <hr />
+
+        @if (Setups.Count != 0)
         {
             
             <div class="card-deck">
 
-                @foreach (var setup in Data.Setups)
+                @foreach (var setup in Setups)
                 {
                     var car = Data.Cars.Where(c => c.Id == setup.Car).FirstOrDefault();
                     var track = Data.Tracks.Where(t => t.Id == setup.Track).FirstOrDefault();
@@ -39,9 +79,56 @@
 {
     [CascadingParameter]
     private AppData Data { get; set; }
-
+    private List<Setup> Setups { get; set; }
+    private List<string> Tracks {get; set;}
+    private List<string> Cars {get; set;}
+    public string SelectedTrack { get; set; } = "Select track...";
+    public string SelectedCar { get; set; } = "Select car...";
     private void DeleteSetupById(Guid id){
         Data.DeleteSetupById(id);
         this.StateHasChanged();
+    }
+
+    protected override void OnParametersSet() {
+        if (Data.Setups != null)
+        {
+            Setups = Data.Setups;
+            Tracks = Data.Tracks.Select(t => t.Name).ToList();
+            Cars = Data.Cars.Select(c => c.Name).ToList();
+        }
+    }
+
+    private void OnClickFilter(){
+        if (SelectedCar != "Select car..." && SelectedTrack != "Select track...")
+        {
+            var selectedTrackGuid = Data.Tracks.Where(t => t.Name == SelectedTrack).Select(t => t.Id).FirstOrDefault();
+            var selectedCarGuid = Data.Cars.Where(c => c.Name == SelectedCar).Select(t => t.Id).FirstOrDefault();
+            Setups = Data.Setups.Where(s => s.Track == selectedTrackGuid).Where(s => s.Car == selectedCarGuid).ToList();
+        }else if (SelectedCar != "Select car..." && SelectedTrack == "Select track...")
+        {
+            var selectedCarGuid = Data.Cars.Where(c => c.Name == SelectedCar).Select(t => t.Id).FirstOrDefault();
+            Setups = Data.Setups.Where(s => s.Car == selectedCarGuid).ToList();
+        }else if (SelectedCar == "Select car..." && SelectedTrack != "Select track...")
+        {
+            var selectedTrackGuid = Data.Tracks.Where(t => t.Name == SelectedTrack).Select(t => t.Id).FirstOrDefault();
+            Setups = Data.Setups.Where(s => s.Track == selectedTrackGuid).ToList();
+        }else
+        {
+            Setups = Data.Setups;
+        }
+    }
+
+    private void OnClickClearFilter(){
+        Setups = Data.Setups;
+        SelectedTrack = "Select track...";
+        SelectedCar = "Select car...";
+    }
+
+    private void OnClickOrderByCar() {
+        Setups = Setups.OrderBy(s => s.Car).ToList();
+    }
+
+    private void OnClickOrderByTrack() {
+        Setups = Setups.OrderBy(s => s.Track).ToList();
     }
 }
