@@ -137,7 +137,11 @@ app {
 }
 
 
-
+.setups-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
 
 .filter-container {
     display: flex;

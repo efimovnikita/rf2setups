@@ -1,28 +1,13 @@
 @inject NavigationManager NavigationManager
+@using System.Globalization
 
-@* <div class="card">
+<div class="card bg-light mb-3">
   <div class="card-body text-center">
     <h5 class="card-title">@CarName</h5>
     <h6 class="card-subtitle mb-2">@TrackName</h6>
     <h6 class="card-subtitle mb-2 text-muted">"@Name"</h6>
+    <h6 class="card-subtitle mb-2 text-muted">@Date.ToString("dddd dd MMMM yyyy",CultureInfo.CreateSpecificCulture("en-US"))</h6>
     <button type="button" class="btn btn-info" @onclick="@(()=>{NavigationManager.NavigateTo($"setup/{Id.ToString()}");})">Details</button>
-  </div>
-</div> *@
-
-<div class="card mb-3">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src="@ImgURL" class="card-img" alt="brand-logo">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">@CarName</h5>
-        <h6 class="card-subtitle mb-2">@TrackName</h6>
-        <h6 class="card-subtitle mb-2 text-muted">"@Name"</h6>
-        <button type="button" class="btn btn-info" @onclick="@(()=>{NavigationManager.NavigateTo($"setup/{Id.ToString()}");})">Details</button>
-        @* <button type="button" class="btn btn-danger" @onclick="@OnClickDeleteButton">Delete</button> *@
-      </div>
-    </div>
   </div>
 </div>
 
@@ -39,7 +24,7 @@
     [Parameter]
     public string ImgURL { get; set; }
     [Parameter]
-    public TimeSpan LapTime { get; set; }
+    public DateTime Date { get; set; }
     [Parameter]
     public EventCallback OnClickDeleteButton { get; set; }
 }
