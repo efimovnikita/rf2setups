@@ -4,30 +4,28 @@
 
 <EditForm Model="tireCalculator" OnValidSubmit="Calculate">
     <DataAnnotationsValidator />
-
-    <div class="form-group">
-        <div class="row">
-            <div class="col-3">
+    <div class="tire-calc-container">
+        <div class="psi-kpa">
+            <div class="kpa">
                 <label class="text-secondary">kPA:</label>
                 <InputNumber class="form-control" @bind-Value="tireCalculator.KPA" />
                 <ValidationMessage For="@(()=>tireCalculator.KPA)" />
             </div>
-            <div class="col-3">
+            <div class="psi">
                 <label class="text-secondary">PSI:</label>
-                <div>
-                    <input type="text" class="@PSIStyle" disabled value="@PSI" />
-                </div>
+                <input type="text" class="@PSIStyle" disabled value="@PSI" />
             </div>
-            <div class="col-6">
+        </div>
+        <div class="recommendations-container">
+            <div class="recommendations">
                 <label class="text-secondary">Recommendations:</label>
-                <div>
-                    <input type="text" class="@PSIStyle" disabled value="@recommendations" />
-                </div>
+                <input type="text" class="@PSIStyle" disabled value="@recommendations" />
             </div>
         </div>
     </div>
-
-    <button class="btn btn-success" type="submit">Calculate</button>
+    <div class="tire-calc-buttons">
+        <button class="btn btn-success" type="submit">Calculate</button>
+    </div>
 </EditForm>
 
 @code

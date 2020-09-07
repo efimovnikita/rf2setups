@@ -137,6 +137,31 @@ app {
 }
 
 
+.tire-calc-container {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.5em;
+    width: 100%;
+}
+
+.psi-kpa {
+    display: flex;
+    flex-direction: row;
+}
+
+    .kpa {
+        margin-right: 1em;
+    }
+
+.recommendations-container {
+    margin-left: 1em;
+    width: 100%;
+}
+
+
+
+
+
 .setups-container {
     display: flex;
     width: 100%;
@@ -178,6 +203,19 @@ app {
         margin-top: 1em;
     }
 
+    .tire-calc-container {
+        flex-direction: column;
+        margin-bottom: 0em;
+    }
+
+    .recommendations-container {
+        margin-left: 0em;
+        margin-bottom: 1em;
+    }
+
+    .psi-kpa {
+        margin-bottom: 1em;
+    }
 }
 
 @media (max-width: 800px) {
