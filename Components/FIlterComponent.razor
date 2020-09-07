@@ -1,0 +1,57 @@
+<div class="filter-container">
+    <div class="filter-selects">
+        <div class="filter-select">
+            <label>Filter by track:</label>
+            <select class="custom-select" name="tracks" @bind="SelectedTrack">
+                <option value="Select track..." selected>Select track...</option>
+                @foreach (var track in Data.Tracks)
+                {
+                    <option value="@track.Name">@track.Name</option>
+                }
+            </select>   
+        </div>
+        <div class="filter-select">
+            <label>Filter by car:</label>
+            <select class="custom-select" name="cars" @bind="SelectedCar">
+                <option value="Select car..." selected>Select car...</option>
+                @foreach (var car in Data.Cars)
+                {
+                    <option value="@car.Name">@car.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="filter-buttons">
+        <button type="button" class="btn btn-dark" @onclick="ClickFilter">Filter</button>
+        <button type="button" class="btn btn-secondary" @onclick="ClickClearFilter">Clear</button>
+        <button type="button" class="btn btn-success" @onclick="OnClickOrderByTrack"><span class="oi oi-sort-ascending"></span> by track</button>
+        <button type="button" class="btn btn-success" @onclick="OnClickOrderByCar"><span class="oi oi-sort-ascending"></span> by car</button>
+    </div>
+</div>            
+
+@code {
+    [CascadingParameter]
+    private AppData Data { get; set; }
+    [Parameter]
+    public EventCallback<string[]> OnClickFilter { get; set; }
+    [Parameter]
+    public EventCallback<string[]> OnClickClearFilter { get; set; }
+    [Parameter]
+    public EventCallback OnClickOrderByCar { get; set; }
+    [Parameter]
+    public EventCallback OnClickOrderByTrack { get; set; }
+    public string SelectedTrack { get; set; } = "Select track...";
+    public string SelectedCar { get; set; } = "Select car...";
+
+    private void ClickFilter() {
+        string[] strArgs = { SelectedCar, SelectedTrack };
+        OnClickFilter.InvokeAsync(strArgs);
+    }
+
+    private void ClickClearFilter() {
+        string[] strArgs = { string.Empty, string.Empty };
+        OnClickClearFilter.InvokeAsync(strArgs);
+        SelectedCar = "Select car...";
+        SelectedTrack = "Select track...";
+    }
+}
