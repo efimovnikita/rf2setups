@@ -37,7 +37,9 @@ namespace rf2setups.Shared.Entities
 
     public class BrakesSetups
     {
-        
+        public double FrontBrakeBias { get; set; }
+        public double RearBrakeBias { get; set; }
+        public int MaxPedalForce { get; set; }
     }
 
     public class ChassisSetups
@@ -58,5 +60,10 @@ namespace rf2setups.Shared.Entities
     public class ElectronicsSetups
     {
         
+    }
+
+    public class DriveTrainSetups
+    {
+        public int Preload { get; set; }
     }
 }
