@@ -34,7 +34,7 @@
                     <SetupComponent 
                         Id="@setup.Id"
                         Name="@setup.Name" 
-                        CarName="@(car.Name)" 
+                        CarName="@($"{car.Brand} {car.Model}")" 
                         TrackName="@(track.Name)"
                         ImgURL="@car.CarBrandImageURL"
                         Date="@setup.Date"
@@ -76,11 +76,11 @@
         if (selectedCar != "Select car..." && selectedTrack != "Select track...")
         {
             var selectedTrackGuid = Data.Tracks.Where(t => t.Name == selectedTrack).Select(t => t.Id).FirstOrDefault();
-            var selectedCarGuid = Data.Cars.Where(c => c.Name == selectedCar).Select(t => t.Id).FirstOrDefault();
+            var selectedCarGuid = Data.Cars.Where(c => $"{c.Brand} {c.Model}" == selectedCar).Select(t => t.Id).FirstOrDefault();
             Setups = Data.Setups.Where(s => s.Track == selectedTrackGuid).Where(s => s.Car == selectedCarGuid).ToList();
         }else if (selectedCar != "Select car..." && selectedTrack == "Select track...")
         {
-            var selectedCarGuid = Data.Cars.Where(c => c.Name == selectedCar).Select(t => t.Id).FirstOrDefault();
+            var selectedCarGuid = Data.Cars.Where(c => $"{c.Brand} {c.Model}" == selectedCar).Select(t => t.Id).FirstOrDefault();
             Setups = Data.Setups.Where(s => s.Car == selectedCarGuid).ToList();
         }else if (selectedCar == "Select car..." && selectedTrack != "Select track...")
         {

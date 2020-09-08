@@ -16,7 +16,7 @@
                 <option value="Select car..." selected>Select car...</option>
                 @foreach (var car in Data.Cars)
                 {
-                    <option value="@car.Name">@car.Name</option>
+                    <option value="@($"{car.Brand} {car.Model}")">@($"{car.Brand} {car.Model}")</option>
                 }
             </select>
         </div>

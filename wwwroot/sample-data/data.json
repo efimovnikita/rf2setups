@@ -2,13 +2,17 @@
     "Cars":[
         {
             "Id":"6f0cb39c-c27a-4ecd-ad9e-ba67240bc3f5",
-            "Name":"Ferrari 488 GTE",
+            "Brand":"Ferrari",
+            "Model":"488 GTE",
+            "Class":"GTE",
             "Date":"2017-09-08T19:01:55.714942+03:00",
             "CarBrandImageURL":"https://cdn.iconscout.com/icon/free/png-256/ferrari-4-202771.png"
         },
         {
             "Id":"4ebaa28a-51e0-4b8a-acda-65a213e9db94",
-            "Name":"Audi R8 LMS",
+            "Brand":"Audi",
+            "Model":"R8 LMS",
+            "Class":"GT3",
             "Date":"2017-09-08T19:01:55.714942+03:00",
             "CarBrandImageURL":"https://i.pinimg.com/originals/6a/cf/b6/6acfb65366aea4e21d0d961d02e6fecf.png"
         }

@@ -6,13 +6,12 @@ namespace rf2setups.Shared.Entities
 {
     public class Car
     {
-        [Required]
         public Guid Id { get; set; }
-        [Required]
-        public string Name { get; set; }
+        public string Brand { get; set; }
+        public string Model { get; set; }
         public List<Guid> Setups { get; set; } = new List<Guid>();
         public DateTime Date { get; set; }
-        [Required]
         public string CarBrandImageURL { get; set; }
+        public string Class { get; set; }
     }
 }
