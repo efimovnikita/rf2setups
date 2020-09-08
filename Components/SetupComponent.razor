@@ -1,12 +1,22 @@
 @inject NavigationManager NavigationManager
 @using System.Globalization
 
-<div class="card bg-light mb-3">
-  <div class="card-body text-center">
-    <h5 class="card-title">@CarName</h5>
-    <h6 class="card-subtitle mb-2">@TrackName</h6>
-    <h6 class="card-subtitle mb-2 text-muted">"@Name"</h6>
-    <h6 class="card-subtitle mb-2 text-muted">@Date.ToString("dddd dd MMMM yyyy",CultureInfo.CreateSpecificCulture("en-US"))</h6>
+<div class="setup-card">
+  <div class="setup-card-car">
+    <h5>@CarName</h5>
+  </div>
+  <div class="setup-card-track">
+    <h6>@TrackName</h6>
+  </div>
+  <div class="setup-card-name muted">
+    <h6>"@Name"</h6>
+  </div>
+  <div class="setup-card-date muted">
+    <h6>
+      @Date.ToString("dddd dd MMMM yyyy",CultureInfo.CreateSpecificCulture("en-US"))
+    </h6>
+  </div>
+  <div class="setup-card-buttons">
     <button type="button" class="btn btn-info" @onclick="@(()=>{NavigationManager.NavigateTo($"setup/{Id.ToString()}");})">Details</button>
   </div>
 </div>

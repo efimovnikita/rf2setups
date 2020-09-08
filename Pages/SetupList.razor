@@ -2,34 +2,30 @@
 @page "/index"
 @page "/setups"
 
-<div class="container">
-    <h2>Cars setups</h2>
 
-    @if (ShowFilters)
-    {
-        <button type="button" class="btn btn-outline-secondary btn-sm mb-1" @onclick=@(()=>ShowFilters = !ShowFilters)>Filters <span class="oi oi-arrow-top"></span></button>        
-        <FIlterComponent 
-            OnClickFilter="OnClickFilter" 
-            OnClickClearFilter="OnClickClearFilter"
-            OnClickOrderByCar="OnClickOrderByCar"
-            OnClickOrderByTrack="OnClickOrderByTrack">
-        </FIlterComponent>
-    }else
-    {
-        <button type="button" class="btn btn-outline-secondary btn-sm mb-1" @onclick=@(()=>ShowFilters = !ShowFilters)>Filters <span class="oi oi-arrow-bottom"></span></button>        
-    }
-    
-    <hr />
+<h2>Cars setups</h2>
 
+@if (ShowFilters)
+{
+    <button type="button" class="btn btn-outline-secondary btn-sm mb-1" @onclick=@(()=>ShowFilters = !ShowFilters)>Filters <span class="oi oi-arrow-top"></span></button>        
+    <FIlterComponent 
+        OnClickFilter="OnClickFilter" 
+        OnClickClearFilter="OnClickClearFilter"
+        OnClickOrderByCar="OnClickOrderByCar"
+        OnClickOrderByTrack="OnClickOrderByTrack">
+    </FIlterComponent>
+}else
+{
+    <button type="button" class="btn btn-outline-secondary btn-sm mb-1" @onclick=@(()=>ShowFilters = !ShowFilters)>Filters <span class="oi oi-arrow-bottom"></span></button>        
+}
+
+<hr />
+
+<div class="setups-container">
     @if (Setups != null)
     {
-
-
         @if (Setups.Count != 0)
         {
-            
-            <div class="setups-container">
-
                 @foreach (var setup in Setups)
                 {
                     var car = Data.Cars.Where(c => c.Id == setup.Car).FirstOrDefault();
@@ -43,10 +39,8 @@
                         ImgURL="@car.CarBrandImageURL"
                         Date="@setup.Date"
                         OnClickDeleteButton="@(() => DeleteSetupById(setup.Id))"
-                    />
+                    ></SetupComponent>
                 }  
-
-            </div>
         }else
         {
             <p>Setup list is empty.</p>
