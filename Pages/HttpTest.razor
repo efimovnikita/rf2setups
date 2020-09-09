@@ -8,7 +8,7 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">@testClass.Name</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Get json-data from: https://blazor-backend-test.herokuapp.com/</h6>
+      <h6 class="card-subtitle mb-2 text-muted">Get json-data from: https://us-central1-rf2setups.cloudfunctions.net/api</h6>
       <p class="card-text">@testClass.Desc</p>
     </div>
   </div>
@@ -20,5 +20,5 @@
     private HttpTestClass testClass = new HttpTestClass();
 
     protected override async Task OnInitializedAsync() => 
-        testClass = await Http.GetFromJsonAsync<HttpTestClass>("https://blazor-backend-test.herokuapp.com/");
+        testClass = await Http.GetFromJsonAsync<HttpTestClass>("https://us-central1-rf2setups.cloudfunctions.net/api/");
 }

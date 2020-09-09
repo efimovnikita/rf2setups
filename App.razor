@@ -20,6 +20,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        appData = await Http.GetFromJsonAsync<AppData>("sample-data/data.json");
+        appData = await Http.GetFromJsonAsync<AppData>("https://us-central1-rf2setups.cloudfunctions.net/api/getinit/");
     }
 }
