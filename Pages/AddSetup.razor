@@ -1,0 +1,85 @@
+@page "/setups/add"
+@using System
+
+@if (Data.Setups != null)
+{
+    <EditForm Model="Setup" OnValidSubmit="Add">
+        <DataAnnotationsValidator />
+
+        <label class="text-secondary">Setup name:</label>
+        <InputText class="form-control" @bind-Value="Setup.Name" />
+        <ValidationMessage For="@(()=> Setup.Name)" />
+
+        <label class="text-secondary">Select car:</label>
+        <InputSelect class="form-control" @bind-Value="SelectedCar">
+            @for (int i = 0; i < Cars.Count; i++)
+            {
+                if (i == 0)
+                {
+                    <option selected>@Cars[i]</option>
+                    continue;
+                }
+
+                <option>@Cars[i]</option>
+            }
+        </InputSelect>
+
+        <label class="text-secondary">Select track:</label>
+        <InputSelect class="form-control" @bind-Value="SelectedTrack">
+            @for (int i = 0; i < Tracks.Count; i++)
+            {
+                if (i == 0)
+                {
+                    <option selected>@Tracks[i]</option>
+                    continue;
+                }
+
+                <option>@Tracks[i]</option>
+            }
+        </InputSelect>
+
+        <button class="btn btn-success" type="submit">Add</button>
+    </EditForm>    
+}else
+{
+    <Spinner></Spinner>
+}
+
+@code {
+    [CascadingParameter]
+    public AppData Data { get; set; }
+    public Setup Setup { get; set; } = new Setup();
+    public List<string> Cars { get; set; }
+    public string SelectedCar { get; set; }
+    public List<string> Tracks { get; set; }
+    public string SelectedTrack { get; set; }
+
+    protected override void OnParametersSet() {
+        if (Data.Cars != null)
+        {
+            Cars = Data.Cars.Select(c => $"{c.Brand} {c.Model}").ToList();
+            if (Cars.Count != 0)
+                SelectedCar = Cars[0];
+        }
+
+        if (Data.Tracks != null)
+        {
+            Tracks = Data.Tracks.Select(t => t.Name).ToList();
+            if (Tracks.Count != 0)
+                SelectedTrack = Tracks[0];
+        }
+    }
+
+    void Add() {
+        var setupId = Guid.NewGuid();
+        var date = DateTime.Now;
+        var carId = Data.Cars.Where(c => $"{c.Brand} {c.Model}" == SelectedCar).FirstOrDefault().Id;
+        var trackId = Data.Tracks.Where(t => t.Name == SelectedTrack).FirstOrDefault().Id;
+
+        System.Console.WriteLine(setupId);
+        System.Console.WriteLine(Setup.Name);
+        System.Console.WriteLine(date);
+        System.Console.WriteLine(carId);
+        System.Console.WriteLine(trackId);
+    }
+}
