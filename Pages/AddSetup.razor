@@ -1,44 +1,55 @@
 @page "/setups/add"
 @using System
+@inject NavigationManager NavigationManager
+@using System.Net.Http
+@inject HttpClient Http
+
+<h2>Add setup</h2>
 
 @if (Data.Setups != null)
 {
     <EditForm Model="Setup" OnValidSubmit="Add">
         <DataAnnotationsValidator />
 
-        <label class="text-secondary">Setup name:</label>
-        <InputText class="form-control" @bind-Value="Setup.Name" />
-        <ValidationMessage For="@(()=> Setup.Name)" />
+        <div style="margin-bottom: 1em;">
+            <label class="text-secondary">Setup name:</label>
+            <InputText class="form-control" @bind-Value="Setup.Name" />
+            <ValidationMessage For="@(()=> Setup.Name)" />
+        </div>
 
-        <label class="text-secondary">Select car:</label>
-        <InputSelect class="form-control" @bind-Value="SelectedCar">
-            @for (int i = 0; i < Cars.Count; i++)
-            {
-                if (i == 0)
+        <div style="margin-bottom: 1em;">
+            <label class="text-secondary">Select car:</label>
+            <InputSelect class="form-control" @bind-Value="SelectedCar">
+                @for (int i = 0; i < Cars.Count; i++)
                 {
-                    <option selected>@Cars[i]</option>
-                    continue;
+                    if (i == 0)
+                    {
+                        <option selected>@Cars[i]</option>
+                        continue;
+                    }
+
+                    <option>@Cars[i]</option>
                 }
+            </InputSelect>
+        </div>
 
-                <option>@Cars[i]</option>
-            }
-        </InputSelect>
-
-        <label class="text-secondary">Select track:</label>
-        <InputSelect class="form-control" @bind-Value="SelectedTrack">
-            @for (int i = 0; i < Tracks.Count; i++)
-            {
-                if (i == 0)
+        <div style="margin-bottom: 1em;">
+            <label class="text-secondary">Select track:</label>
+            <InputSelect class="form-control" @bind-Value="SelectedTrack">
+                @for (int i = 0; i < Tracks.Count; i++)
                 {
-                    <option selected>@Tracks[i]</option>
-                    continue;
+                    if (i == 0)
+                    {
+                        <option selected>@Tracks[i]</option>
+                        continue;
+                    }
+
+                    <option>@Tracks[i]</option>
                 }
+            </InputSelect>
+        </div>
 
-                <option>@Tracks[i]</option>
-            }
-        </InputSelect>
-
-        <button class="btn btn-success" type="submit">Add</button>
+        <button class="btn btn-success btn-sm" type="submit"><span class="oi oi-plus"></span> Add setup</button>
     </EditForm>    
 }else
 {
@@ -70,16 +81,20 @@
         }
     }
 
-    void Add() {
-        var setupId = Guid.NewGuid();
-        var date = DateTime.Now;
-        var carId = Data.Cars.Where(c => $"{c.Brand} {c.Model}" == SelectedCar).FirstOrDefault().Id;
-        var trackId = Data.Tracks.Where(t => t.Name == SelectedTrack).FirstOrDefault().Id;
+    async Task Add() {
+        Setup.Id = Guid.NewGuid();
+        Setup.Date = DateTime.Now;
+        Setup.Car = Data.Cars.Where(c => $"{c.Brand} {c.Model}" == SelectedCar).FirstOrDefault().Id;
+        Setup.Track = Data.Tracks.Where(t => t.Name == SelectedTrack).FirstOrDefault().Id;
 
-        System.Console.WriteLine(setupId);
-        System.Console.WriteLine(Setup.Name);
-        System.Console.WriteLine(date);
-        System.Console.WriteLine(carId);
-        System.Console.WriteLine(trackId);
+        var response = await Http.PostAsJsonAsync("https://us-central1-rf2setups.cloudfunctions.net/api/addsetup", Setup);
+        if (response.IsSuccessStatusCode)
+        {
+            Data.Setups.Add(Setup);
+            NavigationManager.NavigateTo("/setups");
+        }else
+        {
+            System.Console.WriteLine("Request failed...");
+        }
     }
 }
