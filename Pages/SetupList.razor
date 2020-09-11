@@ -2,6 +2,10 @@
 @page "/index"
 @page "/setups"
 
+@using System.Net.Http
+@inject HttpClient Http
+
+
 
 <h2>Cars setups</h2>
 
@@ -42,7 +46,7 @@
                         TrackName="@(track.Name)"
                         ImgURL="@car.CarBrandImageURL"
                         Date="@setup.Date"
-                        OnClickDeleteButton="@(() => DeleteSetupById(setup.Id))"
+                        OnClickDeleteButton="DeleteSetupById"
                     ></SetupComponent>
                 }  
         }else
@@ -62,9 +66,19 @@
     public AppData Data { get; set; }
     public List<Setup> Setups { get; set; }
     public bool ShowFilters { get; set; } = false;
-    private void DeleteSetupById(Guid id){
-        Data.DeleteSetupById(id);
-        this.StateHasChanged();
+    private async Task DeleteSetupById(Guid id){
+
+        var response = await Http.DeleteAsync($"https://us-central1-rf2setups.cloudfunctions.net/api/deletesetup/?id={id}");
+        if (response.IsSuccessStatusCode)
+        {
+            var setup = Data.Setups.Where(s => s.Id == id).FirstOrDefault();
+            if (setup != null)
+                Data.Setups.Remove(setup);
+                Setups.Remove(setup);
+        }else
+        {
+            System.Console.WriteLine("Request failed...");
+        }
     }
 
     protected override void OnParametersSet() {

@@ -18,11 +18,14 @@
   </div>
   <div class="setup-card-buttons">
     <button type="button" class="btn btn-info" @onclick="@(()=>{NavigationManager.NavigateTo($"setup/{Id.ToString()}");})">Details</button>
+    <button type="button" class="btn btn-outline-danger" @onclick="ClickDelete">Delete</button>
   </div>
 </div>
 
 @code
 {
+    [CascadingParameter]
+    public AppData Data { get; set; }
     [Parameter]
     public Guid Id { get; set; }
     [Parameter]
@@ -36,5 +39,9 @@
     [Parameter]
     public DateTime Date { get; set; }
     [Parameter]
-    public EventCallback OnClickDeleteButton { get; set; }
+    public EventCallback<Guid> OnClickDeleteButton { get; set; }
+
+    private void ClickDelete() {
+        OnClickDeleteButton.InvokeAsync(Id);
+    }
 }
