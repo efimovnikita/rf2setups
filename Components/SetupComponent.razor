@@ -22,113 +22,23 @@
   </div>
 </div> *@
 
-<div id="panel-block" 
-style="height: 250px; 
- background: #F2F2F2; 
- box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25); 
- border-radius: 0px 20px;
- position: relative; ">
-  <div id="chamfer-corner" style="position: absolute; 
-  width: 30px; 
-  height: 30px; 
-  left: 0px; 
-  top: 0px; 
-  background-image: url(images/chamfer-corner.svg); "></div>
-  <div id="car-name" style="position: absolute;
-  width: 100%;
-  height: 50px;
-  left: 0px;
-  top: 0px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 32px;
-  line-height: 40px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  color: #414141;">
-  @CarName
-  </div>
-  <div id="track-name" style="
-  position: absolute;
-  width: 100%;
-  height: 40px;
-  left: 0px;
-  top: 50px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 28px;
-  line-height: 33px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  color: #414141; ">
-    @TrackName
-  </div>
-  <div id="setup-name" style="
-  position: absolute;
-  width: 100%;
-  height: 40px;
-  left: 0px;
-  top: 90px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 28px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  color: #8C8A8A; ">
-    "@Name"
-  </div>
-  <div id="setup-date" style="
-  position: absolute;
-  width: 100%;
-  height: 20px;
-  left: 0px;
-  top: 130px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 21px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  color: #8C8A8A; ">
-    @Date.ToString("dddd dd MMMM yyyy",CultureInfo.CreateSpecificCulture("en-US"))
-  </div>
-  <div id="buttons-container" style="
-  position: absolute;
-  width: 100%;
-  height: 100px;
-  left: 0px;
-  top: 150px; 
-
-  display: flex;
-  justify-content: center;
-  align-items: center;">
-    <div style="display: flex; width: 100%; justify-content: space-evenly;">
-      <button type="button" class="btn btn-info" @onclick="@(()=>{NavigationManager.NavigateTo($"setup/{Id.ToString()}");})"><span class="oi oi-info"></span> Details</button>
-      <button type="button" class="btn btn-outline-danger" @onclick="ClickDelete"><span class="oi oi-delete"></span> Delete</button>
+<div class="setup-panel">
+  <div class="setup-panel-car-name">@CarName</div>
+  <div class="setup-panel-track-name">@TrackName</div>
+  <div class="setup-panel-setup-name">"@Name"</div>
+  <div class="setup-panel-setup-date">@Date.ToString("dddd dd MMMM yyyy",CultureInfo.CreateSpecificCulture("en-US"))</div>
+  <div class="setup-panel-setup-buttons">
+    <div class="setup-panel-details-button" @onclick="@(()=>{NavigationManager.NavigateTo($"setup/{Id.ToString()}");})">
+      <span class="material-icons"> info </span>
+      <div class="setup-panel-details-button-text">Details</div>
+    </div>
+    <div class="setup-panel-delete-button" @onclick="ClickDelete">
+      <span class="material-icons"> delete_forever </span>
+      <div class="setup-panel-delete-button-text">Delete</div>
     </div>
   </div>
 </div>
+
 
 @code
 {

@@ -150,7 +150,7 @@ app {
   margin-bottom: 1em;
 }
 
-.setup-card {
+/* .setup-card {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -170,6 +170,131 @@ app {
 
 .setup-card-buttons {
   margin: 0.5em;
+} */
+
+.setup-panel {
+  height: 250px;
+  background: #ffffff;
+  border: 1px solid #3a0647;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.setup-panel-car-name {
+  width: 100%;
+  height: 50px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 32px;
+  line-height: 39px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #414141;
+}
+.setup-panel-track-name {
+  width: 100%;
+  height: 40px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #414141;
+}
+.setup-panel-setup-name {
+  width: 100%;
+  height: 40px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8c8a8a;
+}
+.setup-panel-setup-date {
+  width: 100%;
+  height: 20px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8c8a8a;
+}
+.setup-panel-setup-buttons {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.setup-panel-details-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 40px;
+  border: 1px solid #3a0647;
+  box-sizing: border-box;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  color: #3a0647;
+  cursor: pointer;
+}
+.setup-panel-details-button:hover {
+  color: white;
+  background-color: #3a0647;
+}
+.setup-panel-details-button span {
+  margin-right: 0.2em;
+}
+.setup-panel-delete-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 40px;
+  border: 1px solid #d9534f;
+  box-sizing: border-box;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  color: #d9534f;
+  cursor: pointer;
+}
+.setup-panel-delete-button:hover {
+  color: white;
+  background-color: #d9534f;
+}
+.setup-panel-delete-button span {
+  margin-right: 0.2em;
+}
+.setup-panel-details-button-text {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+}
+.setup-panel-delete-button-text {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
 }
 
 .tire-calc-container {
@@ -245,7 +370,7 @@ app {
 
 @media (max-width: 900px) {
   .setups-container {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -260,9 +385,9 @@ app {
 }
 
 @media (max-width: 440px) {
-  .setups-container {
+  /* .setups-container {
     grid-template-columns: 1fr;
-  }
+  } */
 
   .filter-selects {
     width: 100%;
