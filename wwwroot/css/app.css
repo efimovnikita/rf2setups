@@ -1,5 +1,6 @@
 ﻿@import url("open-iconic/font/css/open-iconic-bootstrap.min.css");
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 html,
 body {
@@ -343,35 +344,66 @@ app {
 }
 
 @media (max-width: 1220px) {
-  .filter-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .filter-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-  .filter-buttons {
-    margin-top: 1em;
-  }
+    .filter-buttons {
+        margin-top: 1em;
+    }
 
-  .tire-calc-container {
-    flex-direction: column;
-    margin-bottom: 0em;
-  }
+    .tire-calc-container {
+        flex-direction: column;
+        margin-bottom: 0em;
+    }
 
-  .recommendations-container {
-    margin-left: 0em;
-    margin-bottom: 1em;
-  }
+    .recommendations-container {
+        margin-left: 0em;
+        margin-bottom: 1em;
+    }
 
-  .psi-kpa {
-    margin-bottom: 1em;
-  }
+    .psi-kpa {
+        margin-bottom: 1em;
+    }
+
+    .setup-panel-car-name {
+        font-size: 26px;
+    }
+
+    .setup-panel-track-name {
+        font-size: 22px;
+    }
+
+    .setup-panel-setup-name {
+        font-size: 18px;
+    }
+
+    .setup-panel-setup-date {
+        font-size: 15px;
+    }
 }
 
 @media (max-width: 900px) {
-  .setups-container {
-    grid-template-columns: 1fr;
-  }
+    .setups-container {
+        grid-template-columns: 1fr;
+    }
+    .setup-panel-car-name {
+        font-size: 32px;
+    }
+
+    .setup-panel-track-name {
+        font-size: 28px;
+    }
+
+    .setup-panel-setup-name {
+        font-size: 24px;
+    }
+
+    .setup-panel-setup-date {
+        font-size: 18px;
+    }
 }
 
 @media (max-width: 800px) {
@@ -385,10 +417,6 @@ app {
 }
 
 @media (max-width: 440px) {
-  /* .setups-container {
-    grid-template-columns: 1fr;
-  } */
-
   .filter-selects {
     width: 100%;
   }

@@ -1,27 +1,6 @@
 @inject NavigationManager NavigationManager
 @using System.Globalization
 
-@* <div class="setup-card">
-  <div class="setup-card-car">
-    <h5>@CarName</h5>
-  </div>
-  <div class="setup-card-track">
-    <h6>@TrackName</h6>
-  </div>
-  <div class="setup-card-name muted">
-    <h6>"@Name"</h6>
-  </div>
-  <div class="setup-card-date muted">
-    <h6>
-      @Date.ToString("dddd dd MMMM yyyy",CultureInfo.CreateSpecificCulture("en-US"))
-    </h6>
-  </div>
-  <div class="setup-card-buttons">
-    <button type="button" class="btn btn-info" @onclick="@(()=>{NavigationManager.NavigateTo($"setup/{Id.ToString()}");})">Details</button>
-    <button type="button" class="btn btn-outline-danger" @onclick="ClickDelete">Delete</button>
-  </div>
-</div> *@
-
 <div class="setup-panel">
   <div class="setup-panel-car-name">@CarName</div>
   <div class="setup-panel-track-name">@TrackName</div>
@@ -38,7 +17,6 @@
     </div>
   </div>
 </div>
-
 
 @code
 {
