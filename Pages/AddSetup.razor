@@ -87,14 +87,12 @@
         Setup.Car = Data.Cars.Where(c => $"{c.Brand} {c.Model}" == SelectedCar).FirstOrDefault().Id;
         Setup.Track = Data.Tracks.Where(t => t.Name == SelectedTrack).FirstOrDefault().Id;
 
+        Data.Setups.Add(Setup);
+        NavigationManager.NavigateTo("/setups");
+
         var response = await Http.PostAsJsonAsync("https://us-central1-rf2setups.cloudfunctions.net/api/addsetup", Setup);
-        if (response.IsSuccessStatusCode)
-        {
-            Data.Setups.Add(Setup);
-            NavigationManager.NavigateTo("/setups");
-        }else
-        {
+
+        if (!response.IsSuccessStatusCode)
             System.Console.WriteLine("Request failed...");
-        }
     }
 }

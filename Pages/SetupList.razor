@@ -66,19 +66,19 @@
     public AppData Data { get; set; }
     public List<Setup> Setups { get; set; }
     public bool ShowFilters { get; set; } = false;
+
     private async Task DeleteSetupById(Guid id){
+        var setup = Data.Setups.Where(s => s.Id == id).FirstOrDefault();
+        if (setup != null)
+        {
+            Data.Setups.Remove(setup);
+            Setups.Remove(setup);
+        }
 
         var response = await Http.DeleteAsync($"https://us-central1-rf2setups.cloudfunctions.net/api/deletesetup/?id={id}");
-        if (response.IsSuccessStatusCode)
-        {
-            var setup = Data.Setups.Where(s => s.Id == id).FirstOrDefault();
-            if (setup != null)
-                Data.Setups.Remove(setup);
-                Setups.Remove(setup);
-        }else
-        {
+
+        if (!response.IsSuccessStatusCode)
             System.Console.WriteLine("Request failed...");
-        }
     }
 
     protected override void OnParametersSet() {
