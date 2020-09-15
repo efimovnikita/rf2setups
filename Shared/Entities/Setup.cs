@@ -13,11 +13,12 @@ namespace rf2setups.Shared.Entities
         public Guid Car { get; set; }
         [Required]
         public Guid Track { get; set; }
-        public TiresSetups Tyres { get; set; }
-        public BrakesSetups Brakes { get; set; }
-        public SuspensionSetups Suspension { get; set; }
-        public AerodynamicsSetups Aerodynamics { get; set; }
-        public ElectronicsSetups Electronics { get; set; }
+        public TiresSetups Tyres { get; set; } = new TiresSetups();
+        public BrakesSetups Brakes { get; set; } = new BrakesSetups();
+        public SuspensionSetups Suspension { get; set; } = new SuspensionSetups();
+        public AerodynamicsSetups Aerodynamics { get; set; } = new AerodynamicsSetups();
+        public ElectronicsSetups Electronics { get; set; } = new ElectronicsSetups();
+        public DriveTrainSetups DriveTrain { get; set; } = new DriveTrainSetups();
     }
 
     public class TiresSetups

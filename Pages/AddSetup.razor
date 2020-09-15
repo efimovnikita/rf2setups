@@ -90,7 +90,7 @@
         Data.Setups.Add(Setup);
         NavigationManager.NavigateTo("/setups");
 
-        var response = await Http.PostAsJsonAsync("https://us-central1-rf2setups.cloudfunctions.net/api/addsetup", Setup);
+        var response = await Http.PostAsJsonAsync($"{Data.API}/addsetup", Setup);
 
         if (!response.IsSuccessStatusCode)
             System.Console.WriteLine("Request failed...");

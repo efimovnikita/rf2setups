@@ -1,39 +1,619 @@
 @page "/setup/{Id}"
 
-@if (setup != null)
+@if (Setup != null)
 {
-    <h2>@($"{car.Brand} {car.Model}") - @track.Name</h2>
-    <h4 class="text-muted">"@setup.Name"</h4>
+    <h2>@($"{Car.Brand} {Car.Model}") - @Track.Name - @Setup.Name</h2>
+    <hr />
 
+    <h4>Tyres</h4>
+    <div class="card mb-3">
+        <div class="card-header">
+            Camber
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Tyres.FrontLeftCamber
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Tyres.FrontRightCamber
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Tyres.RearLeftCamber
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Tyres.RearRightCamber
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-}else
+    <div class="card mb-3">
+        <div class="card-header">
+            Compound
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Front
+                        </div>
+                        <div class="card-body">
+                            @Setup.Tyres.FrontCompound
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear
+                        </div>
+                        <div class="card-body">
+                            @Setup.Tyres.RearCompound
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4>Brakes</h4>
+    <div class="card mb-3">
+        <div class="card-header">
+            Brake bias
+        </div>
+        <div class="card-body">
+            @($"{Setup.Brakes.FrontBrakeBias}:{Setup.Brakes.RearBrakeBias}")
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Max pedal force
+        </div>
+        <div class="card-body">
+            @($"{Setup.Brakes.MaxPedalForce}%")
+        </div>
+    </div>
+
+    <h4>Aerodynamics</h4>
+    <div class="card mb-3">
+        <div class="card-header">
+            Front wing
+        </div>
+        <div class="card-body">
+            @Setup.Aerodynamics.FrontWing
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Rear wing
+        </div>
+        <div class="card-body">
+            @Setup.Aerodynamics.RearWing
+        </div>
+    </div>
+
+    <h4>Electronics</h4>
+    <div class="card mb-3">
+        <div class="card-header">
+            Traction control
+        </div>
+        <div class="card-body">
+            @Setup.Electronics.TractionControl
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            ABS
+        </div>
+        <div class="card-body">
+            @Setup.Electronics.ABS
+        </div>
+    </div>
+
+    <h4>Drive train</h4>
+    <div class="card mb-3">
+        <div class="card-header">
+            Preload
+        </div>
+        <div class="card-body">
+            @Setup.DriveTrain.Preload
+        </div>
+    </div>
+
+    <h4>Suspension</h4>
+    <div class="card mb-3">
+        <div class="card-header">
+            Spring rate
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontSpringRateLeft
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontSpringRateRight
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearSpringRateLeft
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearSpringRateRight
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Slow bump
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontSlowBumpLeft
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontSlowBumpRight
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearSlowBumpLeft
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearSlowBumpRight
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Slow rebound
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontSlowReboundLeft
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontSlowReboundRight
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearSlowReboundLeft
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearSlowReboundRight
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Fast bump
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontFastBumpLeft
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontFastBumpRight
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearFastBumpLeft
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearFastBumpRight
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Fast rebound
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontFastReboundLeft
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontFastReboundRight
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearFastReboundLeft
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearFastReboundRight
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Packers
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontPackersLeft
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontPackersRight
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearPackersLeft
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearPackersRight
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Ride height
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontRideHeightLeft
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontRideHeightRight
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearRideHeightLeft
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearRideHeightRight
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Antisway
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Front
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontAntisway
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearAntisway
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Toe in
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Front
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.FrontToeIn
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear
+                        </div>
+                        <div class="card-body">
+                            @Setup.Suspension.RearToeIn
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+else
 {
     <p>No setup data...</p>
 }
 
-<a href="setups" class="btn btn-dark"><span class="oi oi-chevron-left"></span> Back</a>
+<a href="setups" class="btn btn-outline-dark"><span class="oi oi-chevron-left"></span> Back</a>
 
-@code 
+@code
 {
     [Parameter]
     public string Id { get; set; }
     [CascadingParameter]
     private AppData Data { get; set; }
 
-    private Setup setup;
-    private Car car;
-    private Track track;
-
+    public Setup Setup { get; set; }
+    public Car Car { get; set; }
+    public Track Track { get; set; }
 
     protected override void OnParametersSet()
     {
         if (Data.Setups != null)
         {
-            setup = Data.Setups.Where(s => s.Id == Guid.Parse(Id)).FirstOrDefault();
-            if (setup != null)
+            Setup = Data.Setups.Where(s => s.Id == Guid.Parse(Id)).FirstOrDefault();
+            if (Setup != null)
             {
-                car = Data.Cars.Where(c => c.Id == setup.Car).FirstOrDefault();
-                track = Data.Tracks.Where(t => t.Id == setup.Track).FirstOrDefault();                            
+                Car = Data.Cars.Where(c => c.Id == Setup.Car).FirstOrDefault();
+                Track = Data.Tracks.Where(t => t.Id == Setup.Track).FirstOrDefault();
             }
         }
     }

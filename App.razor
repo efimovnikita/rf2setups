@@ -16,10 +16,10 @@
 
 @code
 {
-    public AppData appData { get; set; } = new AppData(); 
+    public AppData appData { get; set; } = new AppData();
 
     protected override async Task OnInitializedAsync()
     {
-        appData = await Http.GetFromJsonAsync<AppData>("https://us-central1-rf2setups.cloudfunctions.net/api/getinit/");
+        appData = await Http.GetFromJsonAsync<AppData>($"{appData.API}/getinit/");
     }
 }

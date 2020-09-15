@@ -75,7 +75,7 @@
             Setups.Remove(setup);
         }
 
-        var response = await Http.DeleteAsync($"https://us-central1-rf2setups.cloudfunctions.net/api/deletesetup/?id={id}");
+        var response = await Http.DeleteAsync($"{Data.API}/deletesetup/?id={id}");
 
         if (!response.IsSuccessStatusCode)
             System.Console.WriteLine("Request failed...");
