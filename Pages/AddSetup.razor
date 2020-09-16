@@ -5,53 +5,710 @@
 @inject HttpClient Http
 
 <h2>Add setup</h2>
+<hr />
 
 @if (Data.Setups != null)
 {
-    <EditForm Model="Setup" OnValidSubmit="Add">
-        <DataAnnotationsValidator />
+<EditForm Model="Setup" OnValidSubmit="Add">
+    <DataAnnotationsValidator />
 
-        <div style="margin-bottom: 1em;">
-            <label class="text-secondary">Setup name:</label>
+    <div class="card mb-3">
+        <div class="card-header">
+            Setup name
+        </div>
+        <div class="card-body">
             <InputText class="form-control" @bind-Value="Setup.Name" />
             <ValidationMessage For="@(()=> Setup.Name)" />
         </div>
+    </div>
 
-        <div style="margin-bottom: 1em;">
-            <label class="text-secondary">Select car:</label>
+    <div class="card mb-3">
+        <div class="card-header">
+            Car
+        </div>
+        <div class="card-body">
             <InputSelect class="form-control" @bind-Value="SelectedCar">
                 @for (int i = 0; i < Cars.Count; i++)
-                {
-                    if (i == 0)
                     {
+                        if (i == 0)
+                        {
                         <option selected>@Cars[i]</option>
-                        continue;
-                    }
+                            continue;
+                        }
 
                     <option>@Cars[i]</option>
-                }
+                    }
             </InputSelect>
         </div>
+    </div>
 
-        <div style="margin-bottom: 1em;">
-            <label class="text-secondary">Select track:</label>
+    <div class="card mb-3">
+        <div class="card-header">
+            Track
+        </div>
+        <div class="card-body">
             <InputSelect class="form-control" @bind-Value="SelectedTrack">
                 @for (int i = 0; i < Tracks.Count; i++)
-                {
-                    if (i == 0)
                     {
+                        if (i == 0)
+                        {
                         <option selected>@Tracks[i]</option>
-                        continue;
-                    }
+                            continue;
+                        }
 
                     <option>@Tracks[i]</option>
-                }
+                    }
             </InputSelect>
         </div>
+    </div>
 
-        <button class="btn btn-success btn-sm" type="submit"><span class="oi oi-plus"></span> Add setup</button>
-    </EditForm>    
-}else
+    <h4>Tyres</h4>
+    <div class="card mb-3">
+        <div class="card-header">
+            Camber
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Tyres.FrontLeftCamber" />
+                            <ValidationMessage For="@(()=> Setup.Tyres.FrontLeftCamber)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Tyres.FrontRightCamber" />
+                            <ValidationMessage For="@(()=> Setup.Tyres.FrontRightCamber)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Tyres.RearLeftCamber" />
+                            <ValidationMessage For="@(()=> Setup.Tyres.RearLeftCamber)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Tyres.RearRightCamber" />
+                            <ValidationMessage For="@(()=> Setup.Tyres.RearRightCamber)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Compound
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Front
+                        </div>
+                        <div class="card-body">
+                            <InputSelect class="form-control" @bind-Value="SelectedFrontCompound">
+                                <option>Soft</option>
+                                <option selected>Medium</option>
+                                <option>Hard</option>
+                            </InputSelect>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear
+                        </div>
+                        <div class="card-body">
+                            <InputSelect class="form-control" @bind-Value="SelectedRearCompound">
+                                <option>Soft</option>
+                                <option selected>Medium</option>
+                                <option>Hard</option>
+                            </InputSelect>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4>Brakes</h4>
+    <div class="card mb-3">
+        <div class="card-header">
+            Brake bias
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-5">
+                    <InputNumber class="form-control" @bind-Value="Setup.Brakes.FrontBrakeBias" />
+                    <ValidationMessage For="@(()=> Setup.Brakes.FrontBrakeBias)" />
+                </div>
+                <div class="col-2 text-center">
+                    <b>:</b>
+                </div>
+                <div class="col-5">
+                    <InputNumber class="form-control" @bind-Value="Setup.Brakes.RearBrakeBias" />
+                    <ValidationMessage For="@(()=> Setup.Brakes.RearBrakeBias)" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Max pedal force
+        </div>
+        <div class="card-body">
+            <InputNumber class="form-control" @bind-Value="Setup.Brakes.MaxPedalForce" />
+            <ValidationMessage For="@(()=> Setup.Brakes.MaxPedalForce)" />
+        </div>
+    </div>
+
+    <h4>Aerodynamics</h4>
+    <div class="card mb-3">
+        <div class="card-header">
+            Front wing
+        </div>
+        <div class="card-body">
+            <InputNumber class="form-control" @bind-Value="Setup.Aerodynamics.FrontWing" />
+            <ValidationMessage For="@(()=> Setup.Aerodynamics.FrontWing)" />
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Rear wing
+        </div>
+        <div class="card-body">
+            <InputNumber class="form-control" @bind-Value="Setup.Aerodynamics.RearWing" />
+            <ValidationMessage For="@(()=> Setup.Aerodynamics.RearWing)" />
+        </div>
+    </div>
+
+    <h4>Electronics</h4>
+    <div class="card mb-3">
+        <div class="card-header">
+            Traction control
+        </div>
+        <div class="card-body">
+            <InputNumber class="form-control" @bind-Value="Setup.Electronics.TractionControl" />
+            <ValidationMessage For="@(()=> Setup.Electronics.TractionControl)" />
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            ABS
+        </div>
+        <div class="card-body">
+            <InputNumber class="form-control" @bind-Value="Setup.Electronics.ABS" />
+            <ValidationMessage For="@(()=> Setup.Electronics.ABS)" />
+        </div>
+    </div>
+
+    <h4>Drive train</h4>
+    <div class="card mb-3">
+        <div class="card-header">
+            Preload
+        </div>
+        <div class="card-body">
+            <InputNumber class="form-control" @bind-Value="Setup.DriveTrain.Preload" />
+            <ValidationMessage For="@(()=> Setup.DriveTrain.Preload)" />
+        </div>
+    </div>
+
+    <h4>Suspension</h4>
+    <div class="card mb-3">
+        <div class="card-header">
+            Spring rate
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontSpringRateLeft" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontSpringRateLeft)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontSpringRateRight" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontSpringRateRight)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearSpringRateLeft" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearSpringRateLeft)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearSpringRateRight" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearSpringRateRight)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Slow bump
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontSlowBumpLeft" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontSlowBumpLeft)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontSlowBumpRight" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontSlowBumpRight)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearSlowBumpLeft" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearSlowBumpLeft)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearSlowBumpRight" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearSlowBumpRight)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Slow rebound
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontSlowReboundLeft" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontSlowReboundLeft)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontSlowReboundRight" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontSlowReboundRight)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearSlowReboundLeft" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearSlowReboundLeft)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearSlowReboundRight" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearSlowReboundRight)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Fast bump
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontFastBumpLeft" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontFastBumpLeft)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontFastBumpRight" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontFastBumpRight)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearFastBumpLeft" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearFastBumpLeft)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearFastBumpRight" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearFastBumpRight)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Fast rebound
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontFastReboundLeft" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontFastReboundLeft)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontFastReboundRight" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontFastReboundRight)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearFastReboundLeft" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearFastReboundLeft)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearFastReboundRight" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearFastReboundRight)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Packers
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontPackersLeft" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontPackersLeft)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontPackersRight" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontPackersRight)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearPackersLeft" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearPackersLeft)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearPackersRight" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearPackersRight)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Ride height
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontRideHeightLeft" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontRideHeightLeft)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Front right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontRideHeightRight" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontRideHeightRight)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear left
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearRideHeightLeft" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearRideHeightLeft)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear right
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearRideHeightRight" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearRideHeightRight)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Antisway
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Front
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontAntisway" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontAntisway)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearAntisway" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearAntisway)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Toe in
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Front
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.FrontToeIn" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.FrontToeIn)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Rear
+                        </div>
+                        <div class="card-body">
+                            <InputNumber class="form-control" @bind-Value="Setup.Suspension.RearToeIn" />
+                            <ValidationMessage For="@(()=> Setup.Suspension.RearToeIn)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-success btn-sm" type="submit"><span class="oi oi-plus"></span> Add setup</button>
+</EditForm>
+}
+else
 {
     <Spinner></Spinner>
 }
@@ -64,8 +721,11 @@
     public string SelectedCar { get; set; }
     public List<string> Tracks { get; set; }
     public string SelectedTrack { get; set; }
+    public string SelectedFrontCompound { get; set; }
+    public string SelectedRearCompound { get; set; }
 
-    protected override void OnParametersSet() {
+    protected override void OnParametersSet()
+    {
         if (Data.Cars != null)
         {
             Cars = Data.Cars.Select(c => $"{c.Brand} {c.Model}").ToList();
@@ -81,11 +741,15 @@
         }
     }
 
-    async Task Add() {
+    async Task Add()
+    {
         Setup.Id = Guid.NewGuid();
         Setup.Date = DateTime.Now;
         Setup.Car = Data.Cars.Where(c => $"{c.Brand} {c.Model}" == SelectedCar).FirstOrDefault().Id;
         Setup.Track = Data.Tracks.Where(t => t.Name == SelectedTrack).FirstOrDefault().Id;
+
+        Setup.Tyres.FrontCompound = SelectedFrontCompound;
+        Setup.Tyres.RearCompound = SelectedRearCompound;
 
         Data.Setups.Add(Setup);
         NavigationManager.NavigateTo("/setups");
